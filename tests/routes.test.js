@@ -57,6 +57,18 @@ describe("Test the express routes for projects", () => {
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty("_id");
   });
+  // test the POST express route for the '/api/projects' path
+  it("should create a new post", async () => {
+    // create a POST request with SuperTest
+    const res = await request(app).post(`/api/posts`).send({
+      title: "Test Post",
+      image_url: "http://www.testing.com",
+      description: "http://www.testing.com",
+    });
+    // test that the POST request was successful
+    expect(res.statusCode).toEqual(201);
+    expect(res.body).toHaveProperty("_id");
+  });
 });
 afterAll(async () => {
   await mongoose.connection.db.dropDatabase();
