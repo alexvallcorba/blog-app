@@ -1,14 +1,16 @@
-import request from 'supertest'
-import app from '../app.js'
-import mongoose from 'mongoose'
-import Post from '../models/Post.js'
-
+import request from "supertest";
+import app from "../app.js";
+import mongoose from "mongoose";
+import Post from "../models/Post.js";
 
 beforeAll(async () => {
-  const MONGODB_TEST_URI = `mongodb://127.0.0.1/projectsTestDatabase`
+  const MONGODB_TEST_URI = `mongodb://127.0.0.1/projectsTestDatabase`;
 
-  await mongoose.connection.close()
-  await mongoose.connect(MONGODB_TEST_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+  await mongoose.connection.close();
+  await mongoose.connect(MONGODB_TEST_URI, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  });
 
   const posts = [
     {
@@ -37,22 +39,26 @@ beforeAll(async () => {
     },
   ];
 
-  await Post.insertMany(posts)
-  console.log('Created Posts!')
+  await Post.insertMany(posts);
+  console.log("Created Posts!");
+});
 
-})
-  
-let postId
-describe('Test the express routes for projects', () => {
-  it('should show all posts', async () => {
-    const res = await request(app).get(`/api/posts`)
-    expect(res.statusCode).toEqual(200)
-    expect(res.body[0]).toHaveProperty('_id')
-    postId = res.body[0]._id
-  })
-})
+let postId;
+describe("Test the express routes for projects", () => {
+  it("should show all posts", async () => {
+    const res = await request(app).get(`/api/posts`);
+    expect(res.statusCode).toEqual(200);
+    expect(res.body[0]).toHaveProperty("_id");
+    postId = res.body[0]._id;
+  });
+  it("should show a specific project", async () => {
+    // create a GET request with SuperTest using the projectId from the previous POST test
+    const res = await request(app).get(`/api/posts/${postId}`);
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toHaveProperty("_id");
+  });
+});
 afterAll(async () => {
-  await mongoose.connection.db.dropDatabase()
-  await mongoose.connection.close()
-  })
-  
+  await mongoose.connection.db.dropDatabase();
+  await mongoose.connection.close();
+});
