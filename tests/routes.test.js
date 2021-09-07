@@ -79,6 +79,11 @@ describe("Test the express routes for projects", () => {
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty("_id");
   });
+  it("should delete a post", async () => {
+    const res = await request(app).del(`/api/posts/${postId}`);
+    expect(res.statusCode).toEqual(200);
+    expect(res.text).toEqual("Post deleted");
+  });
 });
 afterAll(async () => {
   await mongoose.connection.db.dropDatabase();
