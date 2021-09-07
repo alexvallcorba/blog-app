@@ -6,5 +6,5 @@ const router = Router();
 router.get("/posts", controllers.getPosts);
 router.get(`/posts/:id`, controllers.getPost);
 router.post("/posts", controllers.createPost);
-
+router.put("/posts/:id", controllers.updatePost);
 export default router;
