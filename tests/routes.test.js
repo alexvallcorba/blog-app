@@ -69,6 +69,16 @@ describe("Test the express routes for projects", () => {
     expect(res.statusCode).toEqual(201);
     expect(res.body).toHaveProperty("_id");
   });
+  it("should update a post", async () => {
+    // create a PUT request with SuperTest using the projectId from the POST test
+    const res = await request(app).put(`/api/posts/${postId}`).send({
+      title: "Update Test Post",
+      image_url: "http://www.testing.com",
+      description: "http://www.testing.com",
+    });
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toHaveProperty("_id");
+  });
 });
 afterAll(async () => {
   await mongoose.connection.db.dropDatabase();
