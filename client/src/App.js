@@ -1,5 +1,17 @@
+import { Route, Switch } from 'react-router-dom'
+import Home from './screens/Home/Home'
+
+
 function App() {
-  return <h1>Site deployed for blogApp</h1>;
+  return (
+    <div className='app'>
+      <Switch>
+        <Route exact path="/" component={Home}  />
+        
+      </Switch>
+    </div>
+  )
+    
 }
 
 export default App;
