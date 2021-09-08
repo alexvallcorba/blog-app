@@ -1,6 +1,6 @@
 import api from './apiConfig';
 
-export const getPost = async ()=>{
+export const getPosts = async ()=>{
   try {
     const response = await api.get('/posts')
     return response.data
@@ -9,7 +9,7 @@ export const getPost = async ()=>{
   }
 }
 
-export const getPosts = async id =>{
+export const getPost = async id =>{
   try {
     const response = await api.get(`/posts/${id}`)
     return response.data

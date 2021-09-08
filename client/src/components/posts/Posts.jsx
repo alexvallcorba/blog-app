@@ -3,7 +3,7 @@ import './Posts.css'
 
 
 
-export const Posts = (props) => {
+  const Posts = (props) => {
 
 
 
@@ -17,3 +17,5 @@ export const Posts = (props) => {
       </>
   )
 }
+
+export default Posts
